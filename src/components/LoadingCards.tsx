@@ -1,4 +1,4 @@
-export const LoadingCards = () => {
+export default function LoadingCards() {
   const style = `
      .dark svg#skeleton #colorbase {
         stop-color: #2d2d2d;
@@ -86,4 +86,4 @@ export const LoadingCards = () => {
       </defs>
     </svg>
   );
-};
+}
