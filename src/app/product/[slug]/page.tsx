@@ -15,7 +15,7 @@ export default async function ProductDetailsPage({
 
   return (
     <>
-      <Head>
+      <Head key={slug}>
         <title>{metaTitle}</title>
         {imageUrl && <link rel="icon" type="image/png" href={imageUrl} />}
       </Head>

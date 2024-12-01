@@ -43,9 +43,9 @@ const Topnav2 = () => {
           src={"/icon.png"}
           height={40}
           width={40}
-          alt="Tomame Gadgets"
+          alt="Brox Gadgets"
         ></Image>{" "}
-        Tomame Gadgets
+        Brox Gadgets
       </Link>
       {/* <DropdownMenu >
         <DropdownMenuTrigger asChild>

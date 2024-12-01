@@ -14,9 +14,9 @@ const POSTS_QUERY = `*[
 const options = { next: { revalidate: 30 } };
 
 export const metadata: Metadata = {
-  title: "Tomame Gadgets",
+  title: "Brox Gadgets",
   description:
-    "Tomame Gadgets is a store for all your gadgets, we sell the best gadgets in town at affordable prices. Iphones, Samsung, Laptops, Macbooks, Console games, etc.",
+    "Brox Gadgets is a store for all your gadgets, we sell the best gadgets in town at affordable prices. Iphones, Samsung, Laptops, Macbooks, Console games, etc.",
 };
 
 export default async function Home() {

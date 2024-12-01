@@ -7,7 +7,7 @@ const WhatsappChat = () => {
     <div>
       <FloatingWhatsApp
         phoneNumber="233241801505"
-        accountName="Tomame Gadgets"
+        accountName="Brox Gadgets"
         avatar="/icon.png"
       />
     </div>

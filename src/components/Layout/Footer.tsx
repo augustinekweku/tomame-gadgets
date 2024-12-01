@@ -18,9 +18,9 @@ const Footer = () => {
                   src={"/icon.png"}
                   height={60}
                   width={60}
-                  alt="Tomame Gadgets"
+                  alt="Brox Gadgets"
                 ></Image>{" "}
-                Tomame Gadgets
+                Brox Gadgets
               </Link>
               <p>
                 We sell the best gadgets in town at affordable prices. We are
