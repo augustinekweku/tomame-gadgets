@@ -9,6 +9,7 @@ type ProductDeatilsProps = {
 };
 const ProductDetails = ({ product }: ProductDeatilsProps) => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  console.log("siteUrl", siteUrl);
 
   const encodedText = encodeURIComponent(
     `Hi, I would like to know more about this product(${product.title} || GHs${product.price}) \n ${siteUrl}/product/${product.slug.current}`

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Topnav2 from "@/components/Layout/Topnav2";
@@ -15,12 +14,6 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
-export const metadata: Metadata = {
-  title: "Tomame Gadgets",
-  description:
-    "Tomame Gadgets is a store for all your gadgets, we sell the best gadgets in town at affordable prices. Iphones, Samsung, Laptops, Macbooks, Console games, etc.",
-};
 
 export default function RootLayout({
   children,
