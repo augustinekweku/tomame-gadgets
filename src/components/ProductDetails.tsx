@@ -11,7 +11,7 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   const encodedText = encodeURIComponent(
-    `Hi, I would like to know more about this product \n ${siteUrl}/product/${product.slug.current}`
+    `Hi, I would like to know more about this product(${product.title} || ${product.price}) \n ${siteUrl}/product/${product.slug.current}`
   );
   return (
     <div>
