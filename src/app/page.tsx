@@ -8,7 +8,7 @@ import ProductListContainer from "./ProductListContainer";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...2]{_id, title, slug, "imageUrl": image.asset->url, price,  publishedAt}`;
+]|order(publishedAt desc)[0...10]{_id, title, slug, "imageUrl": image.asset->url, price,  publishedAt}`;
 
 const options = { next: { revalidate: 30 } };
 
