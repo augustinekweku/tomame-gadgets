@@ -1,5 +1,5 @@
-import ProductDetails from "@/components/ProductDetails";
 import { getPostBySlug } from "@/sanity/client";
+import ProductDetailsContainer from "../ProductDetailsContainer";
 // import Head from "next/head";
 
 export default async function ProductDetailsPage({
@@ -20,7 +20,7 @@ export default async function ProductDetailsPage({
         {imageUrl && <link rel="icon" type="image/png" href={imageUrl} />}
       </Head> */}
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-        <ProductDetails product={product} />
+        <ProductDetailsContainer product={product} />
       </main>
     </>
   );

@@ -1,9 +1,9 @@
-import ProductsList from "@/components/ProductsList";
 // import { type SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
 // import Link from "next/link";
 import { IProduct } from "@/types";
+import ProductListContainer from "./ProductListContainer";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -17,7 +17,7 @@ export default async function Home() {
 
   return (
     <div>
-      <ProductsList products={posts} />
+      <ProductListContainer products={posts} />
     </div>
   );
 }
