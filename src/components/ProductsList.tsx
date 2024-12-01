@@ -20,7 +20,7 @@ const ProductsList = ({ products }: ProductListProps) => {
   const page = searchParams.get("page");
   const pageIndex = parseInt(page as string) || 1;
 
-  const POSTS_PER_PAGE = 2;
+  const POSTS_PER_PAGE = 10;
 
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(false);
@@ -147,7 +147,7 @@ const ProductsList = ({ products }: ProductListProps) => {
             </div>
           </div>
           {/* <!-- error state --> */}
-          {error && (
+          {error && !isLoading && !posts?.length && (
             <div className="flex h-40 items-center justify-center">
               <span className="text-lg text-red-500">Error fetching data!</span>
             </div>
