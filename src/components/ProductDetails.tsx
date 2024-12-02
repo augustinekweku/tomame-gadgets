@@ -13,7 +13,7 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   const encodedText = encodeURIComponent(
-    `Hi, I would like to know more about this product(${product.title} || GHs${product.price}) \n ${siteUrl}/product/${product.slug.current}`
+    `Hi, I would like to know more about this product (${product.title} || GHs${product.price}) \n ${siteUrl}/product/${product.slug.current}`
   );
   return (
     <div>
@@ -87,7 +87,7 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
               </h1>
               <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
                 <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                  GH ₵ {product.price}
+                  GH₵ {product.price}
                 </p>
               </div>
 
