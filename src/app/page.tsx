@@ -16,7 +16,8 @@ const options = { next: { revalidate: 30 } };
 export const metadata: Metadata = {
   title: "Brox Gadgets",
   description:
-    "Brox Gadgets is a store for all your gadgets, we sell the best gadgets in town at affordable prices. Iphones, Samsung, Laptops, Macbooks, Console games, etc.",
+    "Buy your Iphones, Laptops, Macbooks, Samsung, Console games, etc. at affordable prices.",
+  keywords: "Iphones, Laptops, Macbooks, Samsung, Console games",
 };
 
 export default async function Home() {
