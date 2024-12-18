@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import "react-photo-view/dist/react-photo-view.css";
 import Topnav2 from "@/components/Layout/Topnav2";
 import Footer from "@/components/Layout/Footer";
 import WhatsappChat from "@/components/WhatsappChat";

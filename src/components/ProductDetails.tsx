@@ -4,7 +4,8 @@ import React from "react";
 import { PortableText } from "@portabletext/react";
 import { TypedObject } from "sanity";
 import Link from "next/link";
-import { truncateText } from "@/utils";
+import { extractImageUrls, truncateText } from "@/utils";
+import ProductDetailsImagesGallery from "./ProductDetailsImagesGallery";
 
 type ProductDeatilsProps = {
   product: IProduct;
@@ -15,6 +16,11 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
   const encodedText = encodeURIComponent(
     `Hi, I would like to know more about this product (${product.title} || GHs${product.price}) \n ${siteUrl}/product/${product.slug.current}`
   );
+
+  function getImages() {
+    const images = extractImageUrls(product);
+    return images ? images : [];
+  }
   return (
     <div>
       <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
@@ -69,7 +75,7 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
             </div>
           </div>
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-            <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
+            <div className="shrink-0 max-w-md lg:max-w-lg ">
               <img
                 className="w-full dark:hidden"
                 src={
@@ -104,8 +110,12 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
               </div>
 
               <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
-
-              <div className="mb-6 text-gray-500 dark:text-gray-400">
+              {getImages()?.length && (
+                <div>
+                  <ProductDetailsImagesGallery images={getImages()} />
+                </div>
+              )}
+              <div className="mb-6 text-gray-500 dark:text-gray-400 mt-10">
                 <PortableText
                   value={product.body as unknown as TypedObject | TypedObject[]}
                 />

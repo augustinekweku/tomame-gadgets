@@ -7,6 +7,7 @@ export const singlequery = groq`
     title,
     slug,
     "imageUrl": image.asset->url,
+     "imageUrl2": image2.asset->url, "imageUrl3": image3.asset->url, "imageUrl4": image4.asset->url,
     price,
     body,
     publishedAt
