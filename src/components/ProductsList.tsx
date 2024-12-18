@@ -158,7 +158,7 @@ const ProductsList = ({ products }: ProductListProps) => {
             </div>
           )}
 
-          {isValidating && (
+          {isLoading && (
             <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
               {new Array(6).fill(undefined).map((item, index) => (
                 <div key={index}>
@@ -167,7 +167,7 @@ const ProductsList = ({ products }: ProductListProps) => {
               ))}
             </div>
           )}
-          {posts && !isLoading && !isValidating && (
+          {posts && !isLoading && (
             <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
               {posts.map((product: IProduct) => (
                 <ProductCard key={product._id} product={product} />
