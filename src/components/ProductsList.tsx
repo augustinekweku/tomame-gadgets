@@ -38,7 +38,7 @@ const ProductsList = ({ products }: ProductListProps) => {
   const {
     data: posts,
     error,
-    isValidating,
+    // isValidating,
   } = useSWR([paginatedquery, paramsForQuery], fetcher, {
     fallbackData: products,
     onSuccess: () => {
