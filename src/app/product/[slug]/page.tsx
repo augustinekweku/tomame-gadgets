@@ -1,6 +1,7 @@
 import { getPostBySlug } from "@/sanity/client";
 import ProductDetailsContainer from "../ProductDetailsContainer";
 import Head from "next/head";
+import { redirect } from "next/navigation";
 
 export default async function ProductDetailsPage({
   params,
@@ -9,6 +10,9 @@ export default async function ProductDetailsPage({
 }) {
   const slug = (await params).slug;
   const product = await getPostBySlug(slug);
+  if (!product.title) {
+    return redirect("/not-found");
+  }
   const { title, price, imageUrl } = product;
 
   const metaTitle = `${title} || GHS ${price}`;
