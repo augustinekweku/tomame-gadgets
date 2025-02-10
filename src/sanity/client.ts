@@ -1,5 +1,5 @@
 import { createClient, QueryParams } from "next-sanity";
-import { paginatedquery, singlequery } from "./groq";
+import { allProductsPaginatedQuery, singlequery } from "./groq";
 
 export const client = createClient({
   projectId: "pijooh83",
@@ -30,7 +30,7 @@ export async function getPostBySlug(slug: string) {
 export async function getPaginatedPosts(limit: number) {
   if (client) {
     return (
-      (await client.fetch(paginatedquery, {
+      (await client.fetch(allProductsPaginatedQuery, {
         pageIndex: 0,
         limit: limit,
       })) || {}

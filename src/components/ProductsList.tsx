@@ -6,9 +6,21 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import { paginatedquery } from "@/sanity/groq";
 import { fetcher } from "@/sanity/client";
 import LoadingCards from "./LoadingCards";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CATEGORIES } from "@/constants";
+import {
+  allProductsPaginatedQuery,
+  paginatedByCategoryquery,
+} from "@/sanity/groq";
+import EmptyState from "./EmptyState";
 
 type ProductListProps = {
   products: IProduct[];
@@ -19,6 +31,7 @@ const ProductsList = ({ products }: ProductListProps) => {
   const searchParams = useSearchParams();
   const page = searchParams.get("page");
   const pageIndex = parseInt(page as string) || 1;
+  const category = searchParams.get("category") ?? "all";
 
   const POSTS_PER_PAGE = 10;
 
@@ -30,6 +43,7 @@ const ProductsList = ({ products }: ProductListProps) => {
   const paramsForQuery = {
     pageIndex: (pageIndex - 1) * POSTS_PER_PAGE,
     limit: pageIndex * POSTS_PER_PAGE,
+    category,
   };
 
   // const fetcher = (query, params) =>
@@ -38,28 +52,37 @@ const ProductsList = ({ products }: ProductListProps) => {
   const {
     data: posts,
     error,
+    mutate,
     // isValidating,
-  } = useSWR([paginatedquery, paramsForQuery], fetcher, {
-    fallbackData: products,
-    onSuccess: () => {
-      setIsLoading(false);
-    },
-  });
+  } = useSWR(
+    [
+      category !== "all" ? paginatedByCategoryquery : allProductsPaginatedQuery,
+      paramsForQuery,
+    ],
+    fetcher,
+    {
+      fallbackData: products,
+
+      onSuccess: () => {
+        setIsLoading(false);
+      },
+    }
+  );
 
   useEffect(() => {
     setIsFirstPage(pageIndex < 2);
   }, [pageIndex]);
 
   useEffect(() => {
-    setIsLastPage(posts.length < POSTS_PER_PAGE);
+    setIsLastPage(posts?.length < POSTS_PER_PAGE);
   }, [posts]);
 
   const handleNextPage = () => {
-    router.push(`/?page=${pageIndex + 1}`);
+    router.push(`/?page=${pageIndex + 1}&category=${category}`);
   };
 
   const handlePrevPage = () => {
-    router.push(`/?page=${pageIndex - 1}`);
+    router.push(`/?page=${pageIndex - 1}&category=${category}`);
   };
 
   return (
@@ -67,7 +90,7 @@ const ProductsList = ({ products }: ProductListProps) => {
       <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           {/* <!-- Heading & Filters --> */}
-          <div className="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8 ">
+          <div className="mb-4 items-center justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8 ">
             <div>
               <nav className="flex !hidden" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -141,9 +164,33 @@ const ProductsList = ({ products }: ProductListProps) => {
                   </li>
                 </ol>
               </nav>
-              <h2 className="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                Electronics
+              <h2 className=" text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+                Shop
               </h2>
+            </div>
+            <div>
+              <Select
+                value={category}
+                onValueChange={(e) => {
+                  //set category value in the url
+                  mutate();
+                  //update the url with the new category in addition to the page
+                  router.push(`/?page=1&category=${e}`);
+                  console.log("value changed", e);
+                }}
+              >
+                <SelectTrigger className="w-full md:w-[200px] lg:w-[180px]">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={"all"}>All Products</SelectItem>
+                  {Object.keys(CATEGORIES).map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {CATEGORIES[category as keyof typeof CATEGORIES].name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
           {/* <!-- error state --> */}
@@ -154,7 +201,7 @@ const ProductsList = ({ products }: ProductListProps) => {
           )}
           {posts && posts?.length === 0 && (
             <div className="flex h-40 items-center justify-center">
-              <span className="text-lg text-gray-500">End of the result!</span>
+              <EmptyState title="No products found." />
             </div>
           )}
 
