@@ -165,7 +165,8 @@ const ProductsList = ({ products }: ProductListProps) => {
                 </ol>
               </nav>
               <h2 className=" text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                Shop
+                {CATEGORIES[category as keyof typeof CATEGORIES]?.name ??
+                  "All Products"}
               </h2>
             </div>
             <div>
@@ -176,7 +177,6 @@ const ProductsList = ({ products }: ProductListProps) => {
                   mutate();
                   //update the url with the new category in addition to the page
                   router.push(`/?page=1&category=${e}`);
-                  console.log("value changed", e);
                 }}
               >
                 <SelectTrigger className="w-full md:w-[200px] lg:w-[180px]">

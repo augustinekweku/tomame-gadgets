@@ -2,11 +2,39 @@ import { getPostBySlug } from "@/sanity/client";
 import ProductDetailsContainer from "../ProductDetailsContainer";
 import Head from "next/head";
 import { redirect } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next";
+import { IProduct } from "@/types";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = (await params).slug;
+
+  // fetch data
+  const product: IProduct = await getPostBySlug(slug);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: product.title,
+    openGraph: {
+      images: [product.imageUrl, ...previousImages],
+    },
+  };
+}
 
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  readonly params: Promise<{ slug: string }>;
 }) {
   const slug = (await params).slug;
   const product = await getPostBySlug(slug);
