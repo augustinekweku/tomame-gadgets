@@ -72,7 +72,7 @@ export default function Contact() {
             <p>
               Find answers to the most common questions about our services.
               purchasing, and payment processes. If you need further assistance,
-              don't hesitate to{" "}
+              don&apos;t hesitate to{" "}
               <Link className="text-primary" href="/contact">
                 Contact us
               </Link>{" "}
