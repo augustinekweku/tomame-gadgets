@@ -2,7 +2,7 @@
 import { Heart, Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import MainNavLinks from "./MainNavLinks";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import { SearchForm } from "../SearchForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchModal from "../SearchModal";
+import { Close } from "@radix-ui/react-dialog";
 const Topnav2 = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,19 +41,17 @@ const Topnav2 = () => {
       <header className="flex h-16  justify-between items-center gap-4 lg:gap-8  bg-white px-4 lg:h-[70px] lg:px-6 border-b-2 py-3 lg:py-4">
         <div className="flex items-center gap-2 lg:gap-16">
           <Sheet open={isMenuOpen}>
-            <SheetTrigger>
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0 lg:hidden"
-                onClick={() => {
-                  setIsMenuOpen((prev) => !prev);
-                }}
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
+            <Button
+              variant="outline"
+              size="icon"
+              className="shrink-0 lg:hidden"
+              onClick={() => {
+                setIsMenuOpen((prev) => !prev);
+              }}
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
             <SheetContent side="left" className="flex flex-col sheet-content">
               <Button
                 variant="outline"
@@ -63,20 +62,7 @@ const Topnav2 = () => {
                 }}
               >
                 <span className="sr-only">Close menu</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <Close className="h-6 w-6" />
               </Button>
               <nav className="grid gap-2 text-lg font-medium ">
                 <Link className=" font-bold flex items-center gap-2" href="/">
