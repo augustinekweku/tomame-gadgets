@@ -1,26 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Button } from "../ui/button";
 
 const Footer = () => {
   return (
     <div>
-      <footer className="">
+      <footer className="shadow-primary-default border-t-2 border-t-primary-weak">
         <footer className="container mx-auto py-12 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <h3 className="text-xl font-semibold mb-2">About Us</h3>
               <Link
-                className="w-full flex-1 font-bold flex items-center gap-2 mb-2"
+                className="w-full flex-1 font-bold flex items-center gap-2 mb-3"
                 href="/"
               >
                 <Image
-                  src={"/icon.png"}
-                  height={60}
-                  width={60}
+                  src={"/images/logo.png"}
+                  height={64}
+                  width={224}
                   alt="Brox Gadgets"
                 ></Image>{" "}
-                Brox Gadgets
               </Link>
               <p>
                 We sell the best gadgets in town at affordable prices. We are
@@ -31,16 +31,14 @@ const Footer = () => {
               <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
               <ul>
                 <li>
-                  <a href="#">Home</a>
+                  <Link href="/">Home</Link>
                 </li>
                 <li>
-                  <a href="#">About</a>
+                  <Link href="/about-us">About</Link>
                 </li>
+
                 <li>
-                  <a href="#">Services</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
+                  <Link href="/contact">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -52,6 +50,18 @@ const Footer = () => {
                 <br />
                 We reply in seconds 😉!
               </p>
+              <Button
+                variant="default"
+                className="font-semibold  hidden lg:flex px-6 mt-4"
+              >
+                Contact Us
+                <Image
+                  src="/icons/button-arrow.svg"
+                  height={20}
+                  width={20}
+                  alt="phone"
+                ></Image>
+              </Button>
             </div>
           </div>
         </footer>

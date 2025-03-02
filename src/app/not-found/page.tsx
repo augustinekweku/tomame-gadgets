@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FolderOpen } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -10,13 +10,15 @@ export default function NotFound() {
       }}
       className="flex flex-col items-center justify-center text-center p-4"
     >
-      <FolderOpen className="w-24 h-24 text-gray-500" />
-      <h1 className="text-3xl font-bold mb-2">Not Found 😕</h1>
+      <Image src="/images/empty-box.png" height={200} width={200} alt="404" />
+      <h1 className="text-2xl font-bold my-2">
+        Sorry, we could not find any matching results
+      </h1>
       <p className="text-gray-500 mb-4">
         The page you are looking for does not exist or was recently deleted.
       </p>
       <Link href="/">
-        <Button>Go Home</Button>
+        <Button variant={"default"}>Go to Homepage</Button>
       </Link>
     </div>
   );

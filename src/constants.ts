@@ -1,28 +1,37 @@
+export const LOCAL_STORAGE_KEYS = {
+  wishlist: "broxShopWishlist",
+};
+
 export const CATEGORIES = {
   laptops: {
     name: "Laptops",
     description: "All the best laptops",
     value: "laptops",
+    banner: "/images/slider-3.jpeg",
   },
   phones: {
     name: "Phones",
     description: "All the best phones",
     value: "phones",
+    banner: "/images/brox-phones.png",
   },
   tablets: {
     name: "Tablets",
     description: "All the best tablets",
     value: "tablets",
+    banner: "/images/tablet-banner.png",
   },
   consoles: {
-    name: "Consoles",
+    name: "Game Consoles",
     description: "All the best consoles",
     value: "consoles",
+    banner: "/images/slider-4.jpeg",
   },
-  clothing: {
-    name: "Clothing",
-    description: "All the best clothing",
-    value: "clothing",
+  accessories: {
+    name: "Accessories",
+    description: "All the best accessories",
+    value: "accessories",
+    banner: "/images/slider-5.jpeg",
   },
 };
 

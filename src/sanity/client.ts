@@ -1,5 +1,5 @@
 import { createClient, QueryParams } from "next-sanity";
-import { allProductsPaginatedQuery, singlequery } from "./groq";
+import { allProductsPaginatedQuery, searchquery, singlequery } from "./groq";
 
 export const client = createClient({
   projectId: "pijooh83",
@@ -34,6 +34,22 @@ export async function getPaginatedPosts(limit: number) {
         pageIndex: 0,
         limit: limit,
       })) || {}
+    );
+  }
+  return {};
+}
+
+//search query
+export async function searchProducts(q: string) {
+  if (client) {
+    return (
+      (await client.fetch(
+        searchquery,
+        { q },
+        {
+          cache: "no-cache",
+        }
+      )) || {}
     );
   }
   return {};

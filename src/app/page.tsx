@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import { IProduct } from "@/types";
 import ProductListContainer from "./ProductListContainer";
 import { Metadata } from "next";
+import HomePageSlider from "@/components/HomePageSlider";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
   description:
     "Buy your Iphones, Laptops, Macbooks, Samsung, Console games, etc. at affordable prices.",
   keywords: "Iphones, Laptops, Macbooks, Samsung, Console games",
+  icons: "/images/favicon.png",
 };
 
 export default async function Home() {
@@ -25,7 +27,12 @@ export default async function Home() {
 
   return (
     <div>
-      <ProductListContainer products={posts} />
+      <div>
+        <HomePageSlider />
+      </div>
+      <div id="shop">
+        <ProductListContainer products={posts} />
+      </div>
     </div>
   );
 }

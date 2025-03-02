@@ -43,3 +43,17 @@ export const allProductsPaginatedQuery = groq`
     publishedAt
 }
 `;
+
+// search query with pagination
+export const searchquery = groq`
+*[_type == "product" && title match $q] | order(publishedAt desc) [$pageIndex...$limit] {
+    "imageUrl": image.asset->url,
+    price,
+    slug,
+    title,
+    category,
+    _id,
+    body,
+    publishedAt
+}
+`;

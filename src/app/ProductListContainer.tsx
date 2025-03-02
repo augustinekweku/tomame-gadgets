@@ -3,17 +3,18 @@ import React, { Suspense } from "react";
 import { IProduct } from "@/types";
 
 interface IProps {
-  products: IProduct[];
+  products?: IProduct[];
+  category?: string;
 }
 
-const ProductListContainer = ({ products }: IProps) => {
+const ProductListContainer = ({ products, category }: IProps) => {
   return (
     <Suspense
       fallback={
         <div className="flex items-center justify-center">Loading...</div>
       }
     >
-      <ProductsList products={products} />
+      <ProductsList products={products} category={category} />
     </Suspense>
   );
 };

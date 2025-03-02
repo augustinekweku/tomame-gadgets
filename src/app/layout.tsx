@@ -5,6 +5,9 @@ import Topnav2 from "@/components/Layout/Topnav2";
 import Footer from "@/components/Layout/Footer";
 import WhatsappChat from "@/components/WhatsappChat";
 import Script from "next/script";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,11 +30,28 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Topnav2 />
-        {children}
-        <WhatsappChat />
-        <Footer />
-        <Script id="google-analytics">
+        <div className=" flex flex-col h-dvh">
+          <div className="top_nav">
+            <Topnav2 />
+          </div>
+          <div
+            className="flex  flex-col h-full"
+            style={{
+              minHeight: "calc(100vh - 70px)",
+              overflowX: "hidden",
+              overflowY: "scroll",
+            }}
+          >
+            <div className="main_content">{children}</div>
+            <div className="footer mt-auto">
+              <WhatsappChat />
+              <Footer />
+              <Toaster />
+            </div>
+          </div>
+        </div>
+
+        <Script id="microsoft-clarity">
           {`
               (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
