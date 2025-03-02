@@ -103,6 +103,10 @@ const ProductsList = ({
     router.push(`/?page=${pageIndex - 1}&category=${category}#shop`);
   };
 
+  function showPaginationButtons() {
+    return posts?.length > 0 && posts?.length > POSTS_PER_PAGE;
+  }
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
@@ -185,8 +189,30 @@ const ProductsList = ({
             </div>
           )}
           {posts && posts?.length === 0 && (
-            <div className="flex h-40 items-center justify-center">
-              <EmptyState title="No products found." />
+            <div className="flex  items-center justify-center">
+              {q ? (
+                <EmptyState
+                  customElement={
+                    <div className="">
+                      <h2 className="mt-2 text-lg font-medium text-gray-400 mb-3">
+                        {" "}
+                        No results found for{" "}
+                        <span className="font-bold">{q}</span>
+                      </h2>
+                      <div>
+                        <h3 className="font-bold my-3">Search Tips</h3>
+                        <ul className="list-disc list-inside">
+                          <li>Try using a different keyword</li>
+                          <li>Double-check your spelling</li>
+                          <li>Try a more general keyword</li>
+                        </ul>
+                      </div>
+                    </div>
+                  }
+                />
+              ) : (
+                <EmptyState title="No products found." />
+              )}
             </div>
           )}
 
@@ -206,33 +232,35 @@ const ProductsList = ({
               ))}
             </div>
           )}
-          <div className="w-full text-center">
-            <div className="mt-10 flex items-center justify-center">
-              <nav
-                className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-                aria-label="Pagination"
-              >
-                <button
-                  type="button"
-                  disabled={isFirstPage}
-                  onClick={handlePrevPage}
-                  className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
+          {showPaginationButtons() && (
+            <div className="w-full text-center">
+              <div className="mt-10 flex items-center justify-center">
+                <nav
+                  className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                  aria-label="Pagination"
                 >
-                  <ChevronLeftIcon className="h-3 w-3" aria-hidden="true" />
-                  <span>Previous</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNextPage}
-                  disabled={isLastPage}
-                  className="relative inline-flex items-center gap-1 rounded-r-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
-                >
-                  <span>Next</span>
-                  <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
-                </button>
-              </nav>
+                  <button
+                    type="button"
+                    disabled={isFirstPage}
+                    onClick={handlePrevPage}
+                    className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
+                  >
+                    <ChevronLeftIcon className="h-3 w-3" aria-hidden="true" />
+                    <span>Previous</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextPage}
+                    disabled={isLastPage}
+                    className="relative inline-flex items-center gap-1 rounded-r-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
+                  >
+                    <span>Next</span>
+                    <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
+                  </button>
+                </nav>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
     </Suspense>

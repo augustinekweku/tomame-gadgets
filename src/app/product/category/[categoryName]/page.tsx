@@ -19,7 +19,7 @@ export default async function CategoryPage({
   const categoryName = (await params).categoryName;
 
   return (
-    <div className="container">
+    <div className="">
       <div
         className="relative h-48 lg:h-60 rounded-b-lg bg-cover bg-center bg-no-repeat shadow-lg"
         style={{
@@ -28,7 +28,7 @@ export default async function CategoryPage({
         }}
       ></div>
       <div className=" flex flex-col items-start justify-center space-y-4 py-4 px-4 sm:flex-row sm:space-y-0 md:justify-between lg:px-0">
-        <div className="max-w-lg">
+        <div className="max-w-lg container">
           <h1 className="text-2xl font-bold text-gray-800">
             {" "}
             {CATEGORIES[categoryName as keyof typeof CATEGORIES]?.name ??
@@ -41,8 +41,8 @@ export default async function CategoryPage({
         </div>
       </div>
 
-      <main>
-        <div id="shop">
+      <main className="bg-gray-50">
+        <div id="shop" className="container">
           <ProductListContainer category={categoryName} />
         </div>
       </main>
