@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { CATEGORIES } from "@/constants";
 import { Button } from "./ui/button";
+import { Close } from "@radix-ui/react-dialog";
 
 interface Props {
   open: boolean;
@@ -23,20 +24,7 @@ const SearchModal = ({ open, onClose }: Props) => {
           }}
         >
           <span className="sr-only">Close menu</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <Close className="h-6 w-6" />
         </Button>
         <div className="p-2  mt-10">
           <SearchForm

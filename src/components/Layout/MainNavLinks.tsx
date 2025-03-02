@@ -88,6 +88,8 @@ const MainNavLinks = ({ flexDirection, location, onEventFired }: Props) => {
                     className="h-4 w-4 ml-1"
                     viewBox="0 0 20 20"
                     fill="currentColor"
+                    height={16}
+                    width={16}
                   >
                     <path
                       fillRule="evenodd"

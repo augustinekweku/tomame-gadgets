@@ -87,6 +87,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
+                  height={16}
+                  width={16}
                 >
                   <path
                     stroke="currentColor"
@@ -108,6 +110,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
+                  height={16}
+                  width={16}
                 >
                   <path
                     stroke="currentColor"
