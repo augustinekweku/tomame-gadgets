@@ -145,7 +145,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <Button
               type="button"
               variant={"default"}
-              className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="transition-opacity duration-300 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
               onClick={() => {
                 router.push(`/product/${product.slug.current}`);
               }}
