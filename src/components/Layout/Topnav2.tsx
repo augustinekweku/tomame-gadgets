@@ -1,5 +1,5 @@
 "use client";
-import { Heart, Menu, Search } from "lucide-react";
+import { Heart, Menu, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -10,7 +10,6 @@ import { SearchForm } from "../SearchForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchModal from "../SearchModal";
-import { Close } from "@radix-ui/react-dialog";
 const Topnav2 = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,7 +61,7 @@ const Topnav2 = () => {
                 }}
               >
                 <span className="sr-only">Close menu</span>
-                <Close className="h-6 w-6" />
+                <X className=" font-bold text-primary h-6 w-6 z-50" />
               </Button>
               <nav className="grid gap-2 text-lg font-medium ">
                 <Link className=" font-bold flex items-center gap-2" href="/">

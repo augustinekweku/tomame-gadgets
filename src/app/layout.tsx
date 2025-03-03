@@ -31,11 +31,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className=" flex flex-col h-dvh">
-          <div className="top_nav">
+          <div className="top_nav fixed w-full">
             <Topnav2 />
           </div>
           <div
-            className="flex  flex-col h-full"
+            className="flex  flex-col h-full mt-[64px]"
             style={{
               minHeight: "calc(100vh - 70px)",
               overflowX: "hidden",

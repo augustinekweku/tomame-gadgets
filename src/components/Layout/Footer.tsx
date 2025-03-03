@@ -8,7 +8,7 @@ const Footer = () => {
     <div>
       <footer className="shadow-primary-default border-t-2 border-t-primary-weak">
         <footer className="container mx-auto py-12 px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
               <h3 className="text-xl font-semibold mb-2">About Us</h3>
               <Link

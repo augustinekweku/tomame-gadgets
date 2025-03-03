@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { CATEGORIES } from "@/constants";
 import { Button } from "./ui/button";
-import { Close } from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
 interface Props {
   open: boolean;
@@ -24,7 +24,7 @@ const SearchModal = ({ open, onClose }: Props) => {
           }}
         >
           <span className="sr-only">Close menu</span>
-          <Close className="h-6 w-6" />
+          <X className="h-6 w-6" />
         </Button>
         <div className="p-2  mt-10">
           <SearchForm

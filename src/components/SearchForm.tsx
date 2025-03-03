@@ -17,6 +17,15 @@ export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent the form from submitting if the search input is empty or has only spaces or tabs or less than 3 characters
+    if (
+      !e.currentTarget.search.value.trim() ||
+      e.currentTarget.search.value.trim().length < 2
+    ) {
+      e.preventDefault();
+      return;
+    }
+
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const search = formData.get("search") as string;

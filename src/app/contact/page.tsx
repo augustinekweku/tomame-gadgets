@@ -27,7 +27,22 @@ const ACCORDION_ITEMS = [
   {
     question: "How do i get my order?",
     answer:
-      "You can pick up your order at our office or we can deliver it to you at a fee.",
+      "You can pick up your order at our office or we can deliver it to you at a fee if you are within Accra. Arrangements can be made for delivery outside Accra.",
+  },
+  {
+    question: "Do you accept payment plans?",
+    answer:
+      "Unfortunately, we do not accept payment plans. We do not take installments at the moment.",
+  },
+  {
+    question: "Do you accept returns?",
+    answer:
+      "Yes, we accept returns within 3 days of purchase if the product is faulty.",
+  },
+  {
+    question: "Do you accept swap/exchnage deals?",
+    answer:
+      "Yes, we accept swap/exchange deals. You can bring your old gadget and exchange it for a new one. Terms and conditions apply.",
   },
 ];
 
@@ -63,7 +78,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <div className="flex  container lg:py-10 items-center flex-col lg:flex-row my-5">
+      <div className="flex  container lg:py-10 items-center flex-col lg:flex-row my-5 gap-6">
         <div className="basis-1/2 w-full">
           <div className="lg:w-3/4">
             <h1 className="text-primary-default font-semibold text-2xl  lg:text-3xl mb-2">
