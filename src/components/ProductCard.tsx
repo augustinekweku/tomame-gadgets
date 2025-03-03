@@ -69,8 +69,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
               <Tooltip>
                 <TooltipTrigger className="text-left">
                   {" "}
-                  <p className="text-xs  lg:text-lg font-semibold leading-tight text-gray-900 hover:underline ">
-                    {truncateText(product.title, 90)}
+                  <p className="text-sm  lg:text-lg  leading-tight text-gray-900 hover:underline ">
+                    {truncateText(product.title, 70)}
                   </p>
                 </TooltipTrigger>
                 <TooltipContent>{product.title}</TooltipContent>

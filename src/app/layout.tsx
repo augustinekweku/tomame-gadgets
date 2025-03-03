@@ -1,4 +1,3 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import "react-photo-view/dist/react-photo-view.css";
 import Topnav2 from "@/components/Layout/Topnav2";
@@ -9,15 +8,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "300", "400", "500", "700"],
 });
 
 export default function RootLayout({
@@ -27,9 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${roboto.className}  antialiased`}>
         <div className=" flex flex-col h-dvh">
           <div className="top_nav fixed w-full shadow-lg z-50">
             <Topnav2 />
