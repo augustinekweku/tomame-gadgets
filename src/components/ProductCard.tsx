@@ -1,19 +1,22 @@
 "use client";
 import { IProduct } from "@/types";
 import { Heart } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { IKImage } from "imagekitio-next";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
 import { truncateText } from "@/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 type ProductCardProps = {
   product: IProduct;
 };
-
-const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
@@ -51,7 +54,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     }
   };
   return (
-    <div className="product-card group relative rounded-lg border border-gray-200 bg-white p-2 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+    <div className="product-card group relative rounded-lg border border-gray-200 bg-white p-3 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="h-full flex lg:flex-col flex-row gap-2 ">
         <div className="w-28 lg:w-full lg:h-48 h-28 flex-none lg:mb-3">
           <img
@@ -62,9 +65,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
         <div className="flex-1 flex flex-col">
           <a href={`/product/${product.slug.current}`}>
-            <p className="text-xs  lg:text-lg font-semibold leading-tight text-gray-900 hover:underline ">
-              {truncateText(product.title, 150)}
-            </p>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="text-left">
+                  {" "}
+                  <p className="text-xs  lg:text-lg font-semibold leading-tight text-gray-900 hover:underline ">
+                    {truncateText(product.title, 90)}
+                  </p>
+                </TooltipTrigger>
+                <TooltipContent>{product.title}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </a>
 
           <div className="mt-auto">
