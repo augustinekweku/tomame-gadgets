@@ -39,6 +39,56 @@ const Topnav2 = () => {
       />
       <header className="flex h-16  justify-between items-center gap-4 lg:gap-8  bg-white px-4 lg:h-[70px] lg:px-6 border-b-2 py-3 lg:py-4">
         <div className="flex items-center gap-2 lg:gap-16">
+          <Link className=" font-bold flex items-center gap-2" href="/">
+            <Image
+              src={"/images/logo.png"}
+              height={28}
+              width={134}
+              alt="Brox Gadgets"
+            ></Image>{" "}
+          </Link>
+
+          <div className="hidden lg:block ">
+            <MainNavLinks flexDirection="flex-row" />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 h-full basis-3/5 lg:basis-2/5 justify-end">
+          <SearchForm customClass="hidden md:block" />
+          <Button
+            variant="default"
+            className="font-semibold  hidden lg:flex px-6"
+            onClick={() => {
+              router.push("/contact");
+            }}
+          >
+            Contact Us
+            <Image
+              src="/icons/button-arrow.svg"
+              height={20}
+              width={20}
+              alt="phone"
+            ></Image>
+          </Button>
+
+          <Button
+            variant={"secondary"}
+            onClick={() => {
+              setOpenSearchModal(true);
+            }}
+            className="md:hidden"
+          >
+            <Search className="h-5 w-5" />
+          </Button>
+          <Button
+            variant={"secondary"}
+            onClick={() => {
+              router.push("/wishlist");
+            }}
+            className=""
+          >
+            <Heart className="h-5 w-5" />
+          </Button>
           <Sheet open={isMenuOpen}>
             <Button
               variant="outline"
@@ -103,56 +153,6 @@ const Topnav2 = () => {
               </div>
             </SheetContent>
           </Sheet>
-          <Link className=" font-bold flex items-center gap-2" href="/">
-            <Image
-              src={"/images/logo.png"}
-              height={28}
-              width={134}
-              alt="Brox Gadgets"
-            ></Image>{" "}
-          </Link>
-
-          <div className="hidden lg:block ">
-            <MainNavLinks flexDirection="flex-row" />
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 h-full basis-3/5 lg:basis-2/5 justify-end">
-          <SearchForm customClass="hidden md:block" />
-          <Button
-            variant="default"
-            className="font-semibold  hidden lg:flex px-6"
-            onClick={() => {
-              router.push("/contact");
-            }}
-          >
-            Contact Us
-            <Image
-              src="/icons/button-arrow.svg"
-              height={20}
-              width={20}
-              alt="phone"
-            ></Image>
-          </Button>
-
-          <Button
-            variant={"secondary"}
-            onClick={() => {
-              setOpenSearchModal(true);
-            }}
-            className="md:hidden"
-          >
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button
-            variant={"secondary"}
-            onClick={() => {
-              router.push("/wishlist");
-            }}
-            className=""
-          >
-            <Heart className="h-5 w-5" />
-          </Button>
         </div>
       </header>
     </>
