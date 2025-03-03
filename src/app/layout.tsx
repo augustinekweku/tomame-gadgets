@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className=" flex flex-col h-dvh">
-          <div className="top_nav fixed w-full">
+          <div className="top_nav fixed w-full shadow-lg z-50">
             <Topnav2 />
           </div>
           <div

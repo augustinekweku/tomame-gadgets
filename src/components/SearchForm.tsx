@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import clsx from "clsx";
+import { useEffect, useRef } from "react";
 
 type Props = {
   customClass?: string;
@@ -15,6 +16,7 @@ type Props = {
 
 export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
   const router = useRouter();
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent the form from submitting if the search input is empty or has only spaces or tabs or less than 3 characters
@@ -32,6 +34,10 @@ export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
     router.push(`/search?q=${search}`);
     onSubmit?.();
   };
+
+  useEffect(() => {
+    searchInputRef.current?.focus();
+  }, []);
   return (
     <form
       className={clsx(customClass, "h-full w-full")}
@@ -42,6 +48,7 @@ export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
           Search
         </Label>
         <SidebarInput
+          ref={searchInputRef}
           id="search"
           placeholder="Search products..."
           className="h-full px-7"
