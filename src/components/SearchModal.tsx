@@ -29,6 +29,7 @@ const SearchModal = ({ open, onClose }: Props) => {
         <div className="p-2  mt-10">
           <SearchForm
             customClass="w-full !h-[45px]"
+            shouldFocus
             onSubmit={() => {
               onClose();
             }}

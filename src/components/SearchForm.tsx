@@ -12,9 +12,14 @@ import { useEffect, useRef } from "react";
 type Props = {
   customClass?: string;
   onSubmit?: () => void;
+  shouldFocus?: boolean;
 };
 
-export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
+export function SearchForm({
+  customClass,
+  onSubmit,
+  shouldFocus,
+}: Readonly<Props>) {
   const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -36,6 +41,7 @@ export function SearchForm({ customClass, onSubmit }: Readonly<Props>) {
   };
 
   useEffect(() => {
+    if (!shouldFocus) return;
     searchInputRef.current?.focus();
   }, []);
   return (
