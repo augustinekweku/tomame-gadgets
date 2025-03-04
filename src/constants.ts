@@ -21,6 +21,19 @@ export const CATEGORIES = {
     value: "tablets",
     banner: "/images/tablet-banner.png",
   },
+  headphones: {
+    name: "Headphones",
+    description: "All the best headphones",
+    value: "headphones",
+    banner: "/images/headphones-banner.png",
+  },
+  earbuds: {
+    name: "Earbuds",
+    description: "All the best earbuds",
+    value: "earbuds",
+    banner: "/images/slider-2.jpeg",
+  },
+
   consoles: {
     name: "Game Consoles",
     description: "All the best consoles",
