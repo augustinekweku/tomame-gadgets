@@ -8,6 +8,7 @@ import EmptyState from "@/components/EmptyState";
 import { useRouter } from "next/navigation";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
 import Link from "next/link";
+import { formatNumberWithCommas } from "@/utils";
 
 export default function WishListPage() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -53,8 +54,8 @@ export default function WishListPage() {
                     </div>
                   </div>
                   <div className="hidden lg:block">
-                    <p className="text-sm lg:text-2xl font-semibold text-nowrap">
-                      GHC {product.price}
+                    <p className="text-sm lg:text-lg font-semibold text-nowrap">
+                      GHC {formatNumberWithCommas(product.price)}
                     </p>
                   </div>
                 </Link>

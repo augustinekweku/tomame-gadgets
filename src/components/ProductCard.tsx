@@ -6,7 +6,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
-import { truncateText } from "@/utils";
+import { formatNumberWithCommas, truncateText } from "@/utils";
 import {
   Tooltip,
   TooltipContent,
@@ -140,7 +140,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
             <div className="flex flex-col lg:flex-row lg:items-center justify-start  lg:justify-between gap-4">
               <p className="text-base lg:text-lg font-bold leading-tight text-gray-900 dark:text-white text-nowrap">
-                GH₵ {product.price}
+                GH₵ {formatNumberWithCommas(product.price)}
               </p>
 
               <Button

@@ -51,7 +51,7 @@ const ProductsList = ({
   const category = searchParams.get("category") ?? defaultCategory ?? "all";
   const q = searchParams.get("q");
 
-  const POSTS_PER_PAGE = 10;
+  const POSTS_PER_PAGE = 12;
 
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstPage, setIsFirstPage] = useState(false);
@@ -102,10 +102,6 @@ const ProductsList = ({
   const handlePrevPage = () => {
     router.push(`/?page=${pageIndex - 1}&category=${category}#shop`);
   };
-
-  function showPaginationButtons() {
-    return posts?.length > 0 && posts?.length > POSTS_PER_PAGE;
-  }
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -232,35 +228,33 @@ const ProductsList = ({
               ))}
             </div>
           )}
-          {showPaginationButtons() && (
-            <div className="w-full text-center">
-              <div className="mt-10 flex items-center justify-center">
-                <nav
-                  className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-                  aria-label="Pagination"
+          <div className="w-full text-center">
+            <div className="mt-10 flex items-center justify-center">
+              <nav
+                className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                aria-label="Pagination"
+              >
+                <button
+                  type="button"
+                  disabled={isFirstPage}
+                  onClick={handlePrevPage}
+                  className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
                 >
-                  <button
-                    type="button"
-                    disabled={isFirstPage}
-                    onClick={handlePrevPage}
-                    className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
-                  >
-                    <ChevronLeftIcon className="h-3 w-3" aria-hidden="true" />
-                    <span>Previous</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNextPage}
-                    disabled={isLastPage}
-                    className="relative inline-flex items-center gap-1 rounded-r-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
-                  >
-                    <span>Next</span>
-                    <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
-                  </button>
-                </nav>
-              </div>
+                  <ChevronLeftIcon className="h-3 w-3" aria-hidden="true" />
+                  <span>Previous</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextPage}
+                  disabled={isLastPage}
+                  className="relative inline-flex items-center gap-1 rounded-r-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
+                >
+                  <span>Next</span>
+                  <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
+                </button>
+              </nav>
             </div>
-          )}
+          </div>
         </div>
       </section>
     </Suspense>

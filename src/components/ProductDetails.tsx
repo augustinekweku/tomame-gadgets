@@ -4,7 +4,11 @@ import React from "react";
 import { PortableText } from "@portabletext/react";
 import { TypedObject } from "sanity";
 import Link from "next/link";
-import { extractImageUrls, truncateText } from "@/utils";
+import {
+  extractImageUrls,
+  formatNumberWithCommas,
+  truncateText,
+} from "@/utils";
 import ProductDetailsImagesGallery from "./ProductDetailsImagesGallery";
 
 type ProductDeatilsProps = {
@@ -95,7 +99,7 @@ const ProductDetails = ({ product }: ProductDeatilsProps) => {
               </h1>
               <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
                 <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                  GH₵ {product.price}
+                  GH₵ {formatNumberWithCommas(product.price)}
                 </p>
               </div>
 
