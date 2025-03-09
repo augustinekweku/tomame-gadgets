@@ -57,3 +57,13 @@ export const searchquery = groq`
     publishedAt
 }
 `;
+
+//search query count all products
+export const searchCountAllQuery = groq`
+count(*[_type == "product" && title match $q])
+`;
+
+//get all products count
+export const allProductsCountQuery = groq`
+count(*[_type == "product"])
+`;

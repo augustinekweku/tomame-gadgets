@@ -1,5 +1,10 @@
 import { createClient, QueryParams } from "next-sanity";
-import { allProductsPaginatedQuery, searchquery, singlequery } from "./groq";
+import {
+  allProductsCountQuery,
+  allProductsPaginatedQuery,
+  searchquery,
+  singlequery,
+} from "./groq";
 
 export const client = createClient({
   projectId: "pijooh83",
@@ -51,6 +56,14 @@ export async function searchProducts(q: string) {
         }
       )) || {}
     );
+  }
+  return {};
+}
+
+// get all products count
+export async function getAllProductsCount() {
+  if (client) {
+    return (await client.fetch(allProductsCountQuery)) || {};
   }
   return {};
 }

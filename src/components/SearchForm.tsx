@@ -4,24 +4,28 @@ import { Search } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { SidebarInput } from "@/components/ui/sidebar";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
+import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
+import { useRouter } from "next/navigation";
 
 type Props = {
   customClass?: string;
   onSubmit?: () => void;
   shouldFocus?: boolean;
+  isAdmin?: boolean;
 };
 
 export function SearchForm({
   customClass,
   onSubmit,
   shouldFocus,
+  isAdmin,
 }: Readonly<Props>) {
-  const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [getQueryString, pushRoute] = useUpdateSearchParams();
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent the form from submitting if the search input is empty or has only spaces or tabs or less than 3 characters
@@ -36,6 +40,10 @@ export function SearchForm({
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const search = formData.get("search") as string;
+    if (isAdmin) {
+      pushRoute(getQueryString("q", search));
+      return;
+    }
     router.push(`/search?q=${search}`);
     onSubmit?.();
   };

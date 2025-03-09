@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Toaster } from "@/components/ui/sonner";
 
 import { Roboto } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -22,39 +23,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${roboto.className}  antialiased`}>
-        <div className=" flex flex-col h-dvh">
-          <div className="top_nav fixed w-full shadow-lg z-50">
-            <Topnav2 />
-          </div>
-          <div
-            className="flex  flex-col h-full mt-[64px]"
-            style={{
-              minHeight: "calc(100vh - 70px)",
-              overflowX: "hidden",
-              overflowY: "scroll",
-            }}
-          >
-            <div className="main_content">{children}</div>
-            <div className="footer mt-auto">
-              <WhatsappChat />
-              <Footer />
-              <Toaster />
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${roboto.className}  antialiased`}>
+          <div className=" flex flex-col h-dvh">
+            <div className="top_nav fixed w-full shadow-lg z-50">
+              <Topnav2 />
+            </div>
+            <div
+              className="flex  flex-col h-full mt-[64px]"
+              style={{
+                minHeight: "calc(100vh - 70px)",
+                overflowX: "hidden",
+                overflowY: "scroll",
+              }}
+            >
+              <div className="main_content">{children}</div>
+              <div className="footer mt-auto">
+                <WhatsappChat />
+                <Footer />
+                <Toaster />
+              </div>
             </div>
           </div>
-        </div>
 
-        <Script id="microsoft-clarity">
-          {`
+          <Script id="microsoft-clarity">
+            {`
               (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "p7l229tfht");     
         `}
-        </Script>
-      </body>
-    </html>
+          </Script>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
