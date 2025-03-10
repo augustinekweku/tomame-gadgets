@@ -1,4 +1,3 @@
-"use client";
 import AccessDenied from "@/components/AccessDenied";
 import React, { Suspense } from "react";
 
