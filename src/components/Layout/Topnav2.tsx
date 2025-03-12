@@ -90,15 +90,7 @@ const Topnav2 = () => {
           >
             <Heart className="h-5 w-5" />
           </Button>
-          <Button
-            variant={"secondary"}
-            onClick={() => {
-              setIsMenuOpen((prev) => !prev);
-            }}
-            className="lg:hidden"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
+
           <NavUserDropdown />
           <Sheet open={isMenuOpen}>
             <Button
