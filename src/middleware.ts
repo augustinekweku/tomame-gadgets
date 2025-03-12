@@ -12,7 +12,6 @@ export default withAuth(
 
     const isInAuthRoute = pathname.includes("/auth");
     const isProtectedRoute = pathname.includes("/admin");
-    console.log("isInAuthRoute", session?.email, pathname, isInAuthRoute);
 
     if (isInAuthRoute && hasSesssion) {
       return NextResponse.redirect(new URL("/admin", req.url));
@@ -21,7 +20,7 @@ export default withAuth(
     if (
       isProtectedRoute &&
       !hasSesssion &&
-      session &&
+      !session &&
       !authorizedUsers.includes(userEmail as string)
     ) {
       return NextResponse.redirect(new URL("/auth/login", req.url));
