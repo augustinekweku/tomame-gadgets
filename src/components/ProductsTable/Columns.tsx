@@ -37,7 +37,7 @@ export const useProductsTableColumns = ({
         return (
           <Image
             className="w-12 h-12 object-cover rounded-lg"
-            src={imageUrl as string}
+            src={(imageUrl as string) ?? "/images/image-placeholder.png"}
             alt="Product"
             width={48}
             height={48}

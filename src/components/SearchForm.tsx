@@ -6,7 +6,7 @@ import { SidebarInput } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
 import { useRouter } from "next/navigation";
 
@@ -53,36 +53,38 @@ export function SearchForm({
     searchInputRef.current?.focus();
   }, []);
   return (
-    <form
-      className={clsx(customClass, "h-full w-full")}
-      onSubmit={handleSubmit}
-    >
-      <div className="relative h-full">
-        <Label htmlFor="search" className="sr-only">
-          Search
-        </Label>
-        <SidebarInput
-          ref={searchInputRef}
-          id="search"
-          placeholder="Search products..."
-          className="h-full px-7"
-          name="search"
-        />
-        <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
-        <Button
-          variant={"ghost"}
-          type="submit"
-          className="z-[999px] px-1 cursor-pointer  absolute right-2 top-1/2 transform -translate-y-1/2"
-        >
-          <Image
-            src="/icons/enter-key.png"
-            height={16}
-            width={16}
-            alt="search"
-            className=" "
+    <Suspense fallback={null}>
+      <form
+        className={clsx(customClass, "h-full w-full")}
+        onSubmit={handleSubmit}
+      >
+        <div className="relative h-full">
+          <Label htmlFor="search" className="sr-only">
+            Search
+          </Label>
+          <SidebarInput
+            ref={searchInputRef}
+            id="search"
+            placeholder="Search products..."
+            className="h-full px-7"
+            name="search"
           />
-        </Button>
-      </div>
-    </form>
+          <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+          <Button
+            variant={"ghost"}
+            type="submit"
+            className="z-[999px] px-1 cursor-pointer  absolute right-2 top-1/2 transform -translate-y-1/2"
+          >
+            <Image
+              src="/icons/enter-key.png"
+              height={16}
+              width={16}
+              alt="search"
+              className=" "
+            />
+          </Button>
+        </div>
+      </form>
+    </Suspense>
   );
 }

@@ -1,21 +1,26 @@
-"use client";
-import { SignOutButton } from "@clerk/nextjs";
-import React, { Suspense } from "react";
+import Link from "next/link";
 
-const AccessDenied = () => {
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+export function AccessDenied() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div>
-        <h1 className="text-3xl font-bold text-center">Access Denied</h1>
-        <p className="mt-3  text-center text-sm">
-          Sign out and sign in with an authorized account
-        </p>
-        <div className="border border-1 p-3  rounded mt-3">
-          <SignOutButton />
-        </div>
-      </div>
-    </Suspense>
+    <Card className="mx-auto max-w-sm">
+      <CardHeader>
+        <CardTitle className="text-2xl">Access Denied</CardTitle>
+        <CardDescription>Please login to access this page</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Link href="/auth/login">
+          <Button className="w-full">Login</Button>
+        </Link>
+      </CardContent>
+    </Card>
   );
-};
-
-export default AccessDenied;
+}

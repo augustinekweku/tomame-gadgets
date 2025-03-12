@@ -7,13 +7,12 @@ import MainNavLinks from "./MainNavLinks";
 import Link from "next/link";
 import Image from "next/image";
 import { SearchForm } from "../SearchForm";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SearchModal from "../SearchModal";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { NavUserDropdown } from "../NavUserDropdown";
 const Topnav2 = () => {
   const router = useRouter();
-  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSearchModal, setOpenSearchModal] = useState(false);
   //close the menu when the user clicks outside the menu
@@ -91,6 +90,16 @@ const Topnav2 = () => {
           >
             <Heart className="h-5 w-5" />
           </Button>
+          <Button
+            variant={"secondary"}
+            onClick={() => {
+              setIsMenuOpen((prev) => !prev);
+            }}
+            className="lg:hidden"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+          <NavUserDropdown />
           <Sheet open={isMenuOpen}>
             <Button
               variant="outline"
@@ -155,15 +164,6 @@ const Topnav2 = () => {
               </div>
             </SheetContent>
           </Sheet>
-
-          {
-            //only show this if you are on the admin page
-            pathname.includes("/admin") && (
-              <SignedIn>
-                <UserButton afterSignOutUrl="/sign-in" />
-              </SignedIn>
-            )
-          }
         </div>
       </header>
     </>

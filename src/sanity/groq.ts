@@ -17,7 +17,38 @@ export const singlequery = groq`
 // [(($pageIndex - 1) * 10)...$pageIndex * 10]{
 // Get  paginated posts by category
 export const paginatedByCategoryquery = groq`
-*[_type == "product" && category == $category && publishStatus == publishStatus]   | order(publishedAt desc) [$pageIndex...$limit] {
+*[_type == "product" && category == $category && publishStatus == $publishStatus]   | order(publishedAt desc) [$pageIndex...$limit] {
+    "imageUrl": image.asset->url,
+    price,
+    slug,
+    title,
+    category,
+    _id,
+    body,
+    publishedAt,
+
+
+}
+`;
+export const paginatedByCategoryqueryForAdmin = groq`
+*[_type == "product" && category == $category ]   | order(publishedAt desc) [$pageIndex...$limit] {
+    "imageUrl": image.asset->url,
+    price,
+    slug,
+    title,
+    category,
+    _id,
+    body,
+    publishedAt,
+
+
+}
+`;
+
+// Get paginated posts
+
+export const allProductsPaginatedQuery = groq`
+*[_type == "product"  && publishStatus == $publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
     "imageUrl": image.asset->url,
     price,
     slug,
@@ -28,11 +59,8 @@ export const paginatedByCategoryquery = groq`
     publishedAt
 }
 `;
-
-// Get paginated posts
-
-export const allProductsPaginatedQuery = groq`
-*[_type == "product"  && publishStatus == publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
+export const allProductsPaginatedQueryForAdmin = groq`
+*[_type == "product" ] | order(publishedAt desc) [$pageIndex...$limit] {
     "imageUrl": image.asset->url,
     price,
     slug,
@@ -46,7 +74,19 @@ export const allProductsPaginatedQuery = groq`
 
 // search query with pagination
 export const searchquery = groq`
-*[_type == "product" && title match $q && publishStatus == publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
+*[_type == "product" && title match $q && publishStatus == $publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
+    "imageUrl": image.asset->url,
+    price,
+    slug,
+    title,
+    category,
+    _id,
+    body,
+    publishedAt
+}
+`;
+export const searchqueryForAdmin = groq`
+*[_type == "product" && title match $q] | order(publishedAt desc) [$pageIndex...$limit] {
     "imageUrl": image.asset->url,
     price,
     slug,
@@ -60,10 +100,16 @@ export const searchquery = groq`
 
 //search query count all products
 export const searchCountAllQuery = groq`
-count(*[_type == "product" && title match $q && category == $category])
+count(*[_type == "product" && title match $q && publishStatus == $publishStatus])
+`;
+export const searchCountAllQueryForAdmin = groq`
+count(*[_type == "product" && title match $q])
 `;
 
 //get all products count
 export const allProductsCountQuery = groq`
+count(*[_type == "product" && publishStatus == $publishStatus])
+`;
+export const allProductsCountQueryForAdmin = groq`
 count(*[_type == "product"])
 `;

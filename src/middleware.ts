@@ -1,29 +1,41 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextConfig } from "next";
+import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { authorizedUsers } from "./lib/authOptions";
 
-// const isPublicRoute = createRouteMatcher(["/sign-in(.*)"]);
-const isInProtectedRoute = createRouteMatcher(["/admin"]);
+export default withAuth(
+  function middleware(req) {
+    const session = req.nextauth?.token;
+    const pathname = req.nextUrl.pathname;
+    const hasSesssion = session;
+    const userEmail = session?.email;
 
-export default clerkMiddleware(async (auth, request) => {
-  const user = await auth();
+    const isInAuthRoute = pathname.includes("/auth");
+    const isProtectedRoute = pathname.includes("/admin");
+    console.log("isInAuthRoute", session?.email, pathname, isInAuthRoute);
 
-  if (
-    user.userId !== "user_2u5KuPqnawktVsRsDGJhiAHk8N3" &&
-    isInProtectedRoute(request) &&
-    user.userId
-  ) {
-    return NextResponse.redirect(new URL("/access-denied", request.url));
+    if (isInAuthRoute && hasSesssion) {
+      return NextResponse.redirect(new URL("/admin", req.url));
+    }
+
+    if (
+      isProtectedRoute &&
+      !hasSesssion &&
+      session &&
+      !authorizedUsers.includes(userEmail as string)
+    ) {
+      return NextResponse.redirect(new URL("/auth/login", req.url));
+    }
+  },
+  {
+    callbacks: {
+      authorized: () => {
+        return true;
+      },
+    },
   }
-  if (isInProtectedRoute(request)) {
-    await auth.protect();
-  }
-});
+);
 
-export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
+export const config: NextConfig = {
+  matcher: ["/", "/auth/:path*", "/admin"],
 };

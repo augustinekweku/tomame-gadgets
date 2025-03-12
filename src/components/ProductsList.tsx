@@ -22,10 +22,15 @@ import {
 import { CATEGORIES, PRODUCT_PUBLISH_STATUS } from "@/constants";
 import {
   allProductsCountQuery,
+  allProductsCountQueryForAdmin,
   allProductsPaginatedQuery,
+  allProductsPaginatedQueryForAdmin,
   paginatedByCategoryquery,
+  paginatedByCategoryqueryForAdmin,
   searchCountAllQuery,
+  searchCountAllQueryForAdmin,
   searchquery,
+  searchqueryForAdmin,
 } from "@/sanity/groq";
 import EmptyState from "./EmptyState";
 import {
@@ -62,42 +67,64 @@ const ProductsList = ({
   const [totalPages, setTotalPages] = useState(0);
 
   // [(($pageIndex - 1) * 10)...$pageIndex * 10]{
-  const paramsForQuery = {
-    pageIndex: (pageIndex - 1) * pageSize,
-    limit: pageIndex * pageSize,
-    category,
-    q,
-    publishStatus: !isAdmin
-      ? PRODUCT_PUBLISH_STATUS.published.value
-      : undefined,
-  };
 
-  const paramsForSearchQuery = {
-    q: q,
-    publishStatus: !isAdmin
-      ? PRODUCT_PUBLISH_STATUS.published.value
-      : undefined,
-  };
+  function paramsForQuery() {
+    if (!isAdmin)
+      return {
+        pageIndex: (pageIndex - 1) * pageSize,
+        limit: pageIndex * pageSize,
+        category,
+        q,
+        publishStatus: PRODUCT_PUBLISH_STATUS.published.value,
+      };
+    return {
+      pageIndex: (pageIndex - 1) * pageSize,
+      limit: pageIndex * pageSize,
+      category,
+      q,
+    };
+  }
+
+  function paramsForSearchQuery() {
+    if (!isAdmin) {
+      return {
+        pageIndex: (pageIndex - 1) * pageSize,
+        limit: pageIndex * pageSize,
+        q: q,
+        publishStatus: PRODUCT_PUBLISH_STATUS.published.value,
+      };
+    }
+    return {
+      q: q,
+    };
+  }
 
   function getQueryToUse() {
     if (isSearching || q) {
-      return searchquery;
+      return isAdmin ? searchqueryForAdmin : searchquery;
     }
-    return category !== "all"
-      ? paginatedByCategoryquery
-      : allProductsPaginatedQuery;
+
+    if (category !== "all") {
+      return isAdmin
+        ? paginatedByCategoryqueryForAdmin
+        : paginatedByCategoryquery;
+    } else {
+      return isAdmin
+        ? allProductsPaginatedQueryForAdmin
+        : allProductsPaginatedQuery;
+    }
   }
 
   function getSearchQueryCountToUse() {
     if (isSearching || q) {
-      return searchCountAllQuery;
+      return isAdmin ? searchCountAllQueryForAdmin : searchCountAllQuery;
     }
-    return allProductsCountQuery;
+    return isAdmin ? allProductsCountQueryForAdmin : allProductsCountQuery;
   }
 
-  const fetchPosts = () => fetcher([getQueryToUse(), paramsForQuery]);
+  const fetchPosts = () => fetcher([getQueryToUse(), paramsForQuery()]);
   const fetchCount = () =>
-    fetcher([getSearchQueryCountToUse(), paramsForSearchQuery]);
+    fetcher([getSearchQueryCountToUse(), paramsForSearchQuery()]);
 
   const {
     data: productsResponse,
@@ -144,9 +171,13 @@ const ProductsList = ({
     router.push(`/?page=${pageIndex - 1}&category=${category}#shop`);
   };
 
+  function canShowEmptyState() {
+    return !isValidating && !productsResponse?.products?.length;
+  }
+
   useEffect(() => {
     mutate();
-  }, [pageIndex, pageSize, q]);
+  }, [pageIndex, pageSize, q, category]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -243,34 +274,33 @@ const ProductsList = ({
                     </span>
                   </div>
                 )}
-              {productsResponse?.products &&
-                productsResponse?.products?.length === 0 && (
-                  <div className="flex  items-center justify-center">
-                    {q ? (
-                      <EmptyState
-                        customElement={
-                          <div className="">
-                            <h2 className="mt-2 text-lg font-medium text-gray-400 mb-3">
-                              {" "}
-                              No results found for{" "}
-                              <span className="font-bold">{q}</span>
-                            </h2>
-                            <div>
-                              <h3 className="font-bold my-3">Search Tips</h3>
-                              <ul className="list-disc list-inside">
-                                <li>Try using a different keyword</li>
-                                <li>Double-check your spelling</li>
-                                <li>Try a more general keyword</li>
-                              </ul>
-                            </div>
+              {canShowEmptyState() && (
+                <div className="flex  items-center justify-center">
+                  {q ? (
+                    <EmptyState
+                      customElement={
+                        <div className="">
+                          <h2 className="mt-2 text-lg font-medium text-gray-400 mb-3">
+                            {" "}
+                            No results found for{" "}
+                            <span className="font-bold">{q}</span>
+                          </h2>
+                          <div>
+                            <h3 className="font-bold my-3">Search Tips</h3>
+                            <ul className="list-disc list-inside">
+                              <li>Try using a different keyword</li>
+                              <li>Double-check your spelling</li>
+                              <li>Try a more general keyword</li>
+                            </ul>
                           </div>
-                        }
-                      />
-                    ) : (
-                      <EmptyState title="No products found." />
-                    )}
-                  </div>
-                )}
+                        </div>
+                      }
+                    />
+                  ) : (
+                    <EmptyState title="No products found." />
+                  )}
+                </div>
+              )}
 
               {isValidating && (
                 <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
