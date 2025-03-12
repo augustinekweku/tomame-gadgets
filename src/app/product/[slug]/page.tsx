@@ -4,6 +4,7 @@ import Head from "next/head";
 import { redirect } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
 import { IProduct } from "@/types";
+import { formatNumberWithCommas } from "@/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: product.title,
+    title: `${product.title} || GHS ${formatNumberWithCommas(product.price)}`,
     openGraph: {
       images: [product.imageUrl, ...previousImages],
     },

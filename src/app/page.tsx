@@ -10,6 +10,7 @@ import HomePageSlider from "@/components/HomePageSlider";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
+  && publishStatus == "published"
 ]|order(publishedAt desc)[0...10]{_id, title, slug, "imageUrl": image.asset->url, price,  publishedAt}`;
 
 const options = { next: { revalidate: 30 } };

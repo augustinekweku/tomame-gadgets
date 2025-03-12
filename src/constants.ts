@@ -70,3 +70,14 @@ export const PRODUCT_CONDITIONS = {
     value: "openBox",
   },
 };
+
+export const PRODUCT_PUBLISH_STATUS = {
+  published: {
+    name: "Published",
+    value: "published",
+  },
+  archived: {
+    name: "Archived",
+    value: "archived",
+  },
+};

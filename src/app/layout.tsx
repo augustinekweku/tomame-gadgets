@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ClerkProvider>
+    <ClerkProvider>
+      <Suspense fallback={<div>Loading...</div>}>
         <html lang="en">
           <body className={`${roboto.className}  antialiased`}>
             <div className=" flex flex-col h-dvh">
@@ -60,7 +60,7 @@ export default function RootLayout({
             </Script>
           </body>
         </html>
-      </ClerkProvider>
-    </Suspense>
+      </Suspense>
+    </ClerkProvider>
   );
 }

@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CATEGORIES } from "@/constants";
+import { CATEGORIES, PRODUCT_PUBLISH_STATUS } from "@/constants";
 import {
   allProductsCountQuery,
   allProductsPaginatedQuery,
@@ -67,6 +67,16 @@ const ProductsList = ({
     limit: pageIndex * pageSize,
     category,
     q,
+    publishStatus: !isAdmin
+      ? PRODUCT_PUBLISH_STATUS.published.value
+      : undefined,
+  };
+
+  const paramsForSearchQuery = {
+    q: q,
+    publishStatus: !isAdmin
+      ? PRODUCT_PUBLISH_STATUS.published.value
+      : undefined,
   };
 
   function getQueryToUse() {
@@ -86,7 +96,8 @@ const ProductsList = ({
   }
 
   const fetchPosts = () => fetcher([getQueryToUse(), paramsForQuery]);
-  const fetchCount = () => fetcher([getSearchQueryCountToUse(), { q }]);
+  const fetchCount = () =>
+    fetcher([getSearchQueryCountToUse(), paramsForSearchQuery]);
 
   const {
     data: productsResponse,
