@@ -1,12 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export function Login() {
-  const searchParams = useSearchParams();
-  const callbackURL = searchParams?.get("callbackUrl");
   const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
 
   return (
@@ -24,7 +21,7 @@ export function Login() {
               onClick={() => {
                 setIsLoadingGoogle(true);
                 signIn("google", {
-                  callbackUrl: callbackURL ?? `${window.location.origin}`,
+                  callbackUrl: "/admin",
                 });
               }}
               variant="default"
