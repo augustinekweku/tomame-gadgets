@@ -20,6 +20,7 @@ export default withAuth(
     console.log("Has Session", hasSesssion);
     console.log("Is in Auth Route", isInAuthRoute);
     console.log("Is Protected Route", isProtectedRoute);
+    console.log("req.url", req.url);
 
     if (isProtectedRoute && !hasSesssion) {
       return NextResponse.redirect(new URL("/auth/login", req.url));
