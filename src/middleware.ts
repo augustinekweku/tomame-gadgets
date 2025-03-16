@@ -35,5 +35,5 @@ export default withAuth(
 );
 
 export const config: NextConfig = {
-  matcher: ["/", "/auth/:path*", "/admin"],
+  matcher: ["/"],
 };
