@@ -64,8 +64,10 @@ export const authOptions: AuthOptions = {
       }
       return false;
     },
-    async session({ session }) {
-      console.log("Session token", session);
+    async session({ session, token }) {
+      if (token) {
+        token.picture = "";
+      }
       if (session.user) session.user.image = "";
       return session;
     },
