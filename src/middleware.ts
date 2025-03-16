@@ -20,7 +20,6 @@ export default withAuth(
     if (
       isProtectedRoute &&
       !hasSesssion &&
-      !session &&
       !authorizedUsers.includes(userEmail as string)
     ) {
       return NextResponse.redirect(new URL("/auth/login", req.url));

@@ -59,11 +59,14 @@ export const authOptions: AuthOptions = {
       }
 
       if (user) {
+        user.image = "";
         return authorizedUsers.includes(user.email as string);
       }
       return false;
     },
     async session({ session }) {
+      console.log("Session token", session);
+      if (session.user) session.user.image = "";
       return session;
     },
   },
