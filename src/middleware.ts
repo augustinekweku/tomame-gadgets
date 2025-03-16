@@ -15,6 +15,12 @@ export default withAuth(
       return NextResponse.redirect(new URL("/admin", req.url));
     }
 
+    console.log("Session", session);
+    console.log("Pathname", pathname);
+    console.log("Has Session", hasSesssion);
+    console.log("Is in Auth Route", isInAuthRoute);
+    console.log("Is Protected Route", isProtectedRoute);
+
     if (isProtectedRoute && !hasSesssion) {
       return NextResponse.redirect(new URL("/auth/login", req.url));
     }
