@@ -25,3 +25,12 @@ export const getSessionMaxAge = () => {
   const difference = targetTime.getTime() - now.getTime();
   return Math.floor(difference / 1000);
 };
+
+export function getProductCondition(condition: string): string {
+  const CONDITON_MAP: { [key: string]: string } = {
+    new: "New",
+    used: "Used",
+    foreignUsed: "Foreign Used",
+  };
+  return CONDITON_MAP[condition] || "Best Price";
+}

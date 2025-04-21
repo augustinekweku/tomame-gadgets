@@ -10,7 +10,8 @@ export const singlequery = groq`
      "imageUrl2": image2.asset->url, "imageUrl3": image3.asset->url, "imageUrl4": image4.asset->url,
     price,
     body,
-    publishedAt
+    publishedAt,
+    condition,
 }
 `;
 
@@ -26,6 +27,7 @@ export const paginatedByCategoryquery = groq`
     _id,
     body,
     publishedAt,
+    condition,
 
 
 }
@@ -40,6 +42,7 @@ export const paginatedByCategoryqueryForAdmin = groq`
     _id,
     body,
     publishedAt,
+    condition
 
 
 }
@@ -56,7 +59,9 @@ export const allProductsPaginatedQuery = groq`
     category,
     _id,
     body,
-    publishedAt
+    publishedAt,
+    condition,
+
 }
 `;
 export const allProductsPaginatedQueryForAdmin = groq`
@@ -68,7 +73,8 @@ export const allProductsPaginatedQueryForAdmin = groq`
     category,
     _id,
     body,
-    publishedAt
+    publishedAt,
+    condition
 }
 `;
 
@@ -82,7 +88,8 @@ export const searchquery = groq`
     category,
     _id,
     body,
-    publishedAt
+    publishedAt,
+    condition
 }
 `;
 export const searchqueryForAdmin = groq`
@@ -94,7 +101,8 @@ export const searchqueryForAdmin = groq`
     category,
     _id,
     body,
-    publishedAt
+    publishedAt,
+    condition
 }
 `;
 

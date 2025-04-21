@@ -6,13 +6,18 @@ import React from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
-import { formatNumberWithCommas, truncateText } from "@/utils";
+import {
+  formatNumberWithCommas,
+  getProductCondition,
+  truncateText,
+} from "@/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Badge } from "./ui/badge";
 
 type ProductCardProps = {
   product: IProduct;
@@ -58,7 +63,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       onClick={() => {
         router.push(`/product/${product.slug.current}`);
       }}
-      className="product-card group relative rounded-lg border border-gray-200 bg-white p-3 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+      className="cursor-pointer product-card group relative rounded-lg border border-gray-200 bg-white p-3 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
     >
       <div className="h-full flex lg:flex-col flex-row gap-2 ">
         <div className="w-28 lg:w-full lg:h-48 h-28 flex-none lg:mb-3">
@@ -110,7 +115,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 </li>
 
                 <li className="flex items-center gap-2">
-                  <svg
+                  {/* <svg
                     className="h-4 w-4 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +133,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   </svg>
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Best Price
-                  </p>
+                  </p> */}
+                  <Badge variant="secondary">
+                    {getProductCondition(product.condition ?? "")}
+                  </Badge>
                 </li>
               </ul>
 

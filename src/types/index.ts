@@ -10,4 +10,5 @@ export interface IProduct {
   body: string;
   publishStatus: "published" | "archived";
   publishedAt: string;
+  condition: string;
 }
