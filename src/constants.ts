@@ -9,6 +9,18 @@ export const CATEGORIES = {
     value: "laptops",
     banner: "/images/slider-3.jpeg",
   },
+  macbooks: {
+    name: "Macbooks",
+    description: "All the best macbooks",
+    value: "macbooks",
+    banner: "/images/slider-3.jpeg",
+  },
+  desktops: {
+    name: "Desktops",
+    description: "All the best desktops",
+    value: "desktops",
+    banner: "/images/slider-3.jpeg",
+  },
   phones: {
     name: "Phones",
     description: "All the best phones",
@@ -21,9 +33,9 @@ export const CATEGORIES = {
     value: "tablets",
     banner: "/images/tablet-banner.png",
   },
-  headphones: {
-    name: "Headphones",
-    description: "All the best headphones",
+  headsets: {
+    name: "Headsets",
+    description: "All the best headsets",
     value: "headphones",
     banner: "/images/headphones-banner.png",
   },
@@ -33,10 +45,9 @@ export const CATEGORIES = {
     value: "earbuds",
     banner: "/images/slider-2.jpeg",
   },
-
   consoles: {
-    name: "Game Consoles",
-    description: "All the best consoles",
+    name: "Gaming Consoles",
+    description: "All the best gaming consoles",
     value: "consoles",
     banner: "/images/slider-4.jpeg",
   },

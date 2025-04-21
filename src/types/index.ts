@@ -8,5 +8,6 @@ export interface IProduct {
   price: number;
   imageUrl: string;
   body: string;
+  publishStatus: "published" | "archived";
   publishedAt: string;
 }

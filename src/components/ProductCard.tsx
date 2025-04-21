@@ -54,7 +54,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
     }
   };
   return (
-    <div className="product-card group relative rounded-lg border border-gray-200 bg-white p-3 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+    <div
+      onClick={() => {
+        router.push(`/product/${product.slug.current}`);
+      }}
+      className="product-card group relative rounded-lg border border-gray-200 bg-white p-3 lg:p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+    >
       <div className="h-full flex lg:flex-col flex-row gap-2 ">
         <div className="w-28 lg:w-full lg:h-48 h-28 flex-none lg:mb-3">
           <img
