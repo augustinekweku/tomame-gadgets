@@ -18,8 +18,8 @@ const options = { next: { revalidate: 30 } };
 export const metadata: Metadata = {
   title: "Brox Gadgets",
   description:
-    "Buy your Iphones, Laptops, Macbooks, Samsung, Console games, etc. at affordable prices.",
-  keywords: "Iphones, Laptops, Macbooks, Samsung, Console games",
+    "Buy your Iphones, Laptops, Macbooks, Samsung, Console games, etc. at affordable prices at Brox Gadgets.",
+  keywords: "Brox Gadgets, Iphones, Laptops, Macbooks, Samsung, Console games",
   icons: "/images/favicon.png",
 };
 
