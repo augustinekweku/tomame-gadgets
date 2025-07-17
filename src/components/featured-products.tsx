@@ -71,9 +71,7 @@ export default function FeaturedProducts() {
     <>
       <section className="py-6 px-4">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">
-            Featured Products
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-1">Hot Deals</h2>
           <p className="text-gray-600 text-sm">
             Discover our top picks just for you
           </p>
@@ -84,28 +82,28 @@ export default function FeaturedProducts() {
           <Button
             variant="outline"
             size="sm"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white shadow-md"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-6 w-6 p-0 bg-white shadow-md"
             onClick={scrollLeft}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-2 w-2" />
           </Button>
 
           <Button
             variant="outline"
             size="sm"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white shadow-md"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-6 w-6 p-0 bg-white shadow-md"
             onClick={scrollRight}
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-2 w-2" />
           </Button>
 
           {/* Products Container */}
           <div
             ref={scrollRef}
-            className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory px-10"
+            className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory px-8"
           >
             {hotDeals?.hotDeals.map((product) => (
-              <Card key={product._id} className="flex-none w-32 snap-start">
+              <Card key={product._id} className="flex-none w-28 snap-start">
                 <CardContent className="p-1">
                   <div className="relative">
                     <Image
