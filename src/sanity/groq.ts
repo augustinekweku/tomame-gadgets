@@ -14,6 +14,19 @@ export const singlequery = groq`
     condition,
 }
 `;
+// Single Hot Deal
+export const singleHotDeal = groq`
+*[_type == "hotDeal" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    "imageUrl": image.asset->url,
+    price,
+    body,
+    publishedAt,
+    condition,
+}
+`;
 
 // [(($pageIndex - 1) * 10)...$pageIndex * 10]{
 // Get  paginated posts by category
@@ -52,6 +65,22 @@ export const paginatedByCategoryqueryForAdmin = groq`
 
 export const allProductsPaginatedQuery = groq`
 *[_type == "product"  && publishStatus == $publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
+    "imageUrl": image.asset->url,
+    price,
+    slug,
+    title,
+    category,
+    _id,
+    body,
+    publishedAt,
+    condition,
+
+}
+`;
+// Get all paginated hot deals
+
+export const allHotDealsPaginatedQuery = groq`
+*[_type == "hotDeal"  && publishStatus == $publishStatus] | order(publishedAt desc) [$pageIndex...$limit] {
     "imageUrl": image.asset->url,
     price,
     slug,

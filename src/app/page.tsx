@@ -6,6 +6,7 @@ import { IProduct } from "@/types";
 import ProductListContainer from "./ProductListContainer";
 import { Metadata } from "next";
 import HomePageSlider from "@/components/HomePageSlider";
+import FeaturedProducts from "@/components/featured-products";
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -29,7 +30,8 @@ export default async function Home() {
   return (
     <div>
       <div>
-        <HomePageSlider />
+        {/* <HomePageSlider /> */}
+        <FeaturedProducts />
       </div>
       <div id="shop">
         <ProductListContainer products={posts} />
