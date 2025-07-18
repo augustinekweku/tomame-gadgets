@@ -4,7 +4,6 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useRef, useState } from "react";
 import { fetcher } from "@/sanity/client";
 import { allHotDealsPaginatedQuery } from "@/sanity/groq";
@@ -12,6 +11,7 @@ import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { IProduct } from "@/types";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
+import { truncateText } from "@/utils";
 
 export default function FeaturedProducts() {
   const searchParams = useSearchParams();
@@ -69,7 +69,7 @@ export default function FeaturedProducts() {
 
   return (
     <>
-      <section className="py-6 px-4">
+      <section className="mx-auto max-w-screen-xl px-4 2xl:px-0 py-4">
         <div className="mb-4">
           <h2 className="text-2xl font-bold text-gray-900 mb-1">Hot Deals</h2>
           <p className="text-gray-600 text-sm">
@@ -103,7 +103,19 @@ export default function FeaturedProducts() {
             className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory px-8"
           >
             {hotDeals?.hotDeals.map((product) => (
-              <Card key={product._id} className="flex-none w-28 snap-start">
+              <Card
+                key={product._id}
+                className="flex-none w-28 snap-start cursor-pointer"
+                onClick={() => {
+                  setEncodedText(
+                    encodeURIComponent(
+                      `Hi, I would like to know more about this product (${product.title}${product?.price ? " || GHs " + product?.price : ""}) \n ${siteUrl}/hot-deal/${product.slug.current}`
+                    )
+                  );
+
+                  openFullscreen(product.imageUrl);
+                }}
+              >
                 <CardContent className="p-1">
                   <div className="relative">
                     <Image
@@ -112,25 +124,16 @@ export default function FeaturedProducts() {
                       width={300}
                       height={400}
                       className="w-full h-36 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                      onClick={() => {
-                        setEncodedText(
-                          encodeURIComponent(
-                            `Hi, I would like to know more about this product (${product.title}${product?.price ? " || GHs " + product?.price : ""}) \n ${siteUrl}/hot-deal/${product.slug.current}`
-                          )
-                        );
-
-                        openFullscreen(product.imageUrl);
-                      }}
                     />
-                    <Badge
+                    {/* <Badge
                       variant="secondary"
                       className="absolute top-1 left-1 text-xs px-1 py-0.5 text-[10px]"
                     >
                       {}
-                    </Badge>
-                    {/* <div className="absolute bottom-0 left-0 w-full bg-black/60 text-white text-xs px-2 py-1 rounded-b-lg">
+                    </Badge> */}
+                    <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-[0.6rem] px-2 py-1 rounded-b-lg">
                       {truncateText(product.title, 30)}
-                    </div> */}
+                    </div>
                     {/* <Button
                       size="sm"
                       variant="ghost"
@@ -148,8 +151,21 @@ export default function FeaturedProducts() {
 
       {/* Fullscreen Image Modal */}
       {fullscreenImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-full max-h-full">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+          onClick={(e) => {
+            // Close modal only if the click is outside the content area
+            if (e.target === e.currentTarget) {
+              closeFullscreen();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              closeFullscreen();
+            }
+          }}
+        >
+          <div className="relative fullscreen-product max-w-full max-h-full">
             <Button
               variant="ghost"
               size="sm"

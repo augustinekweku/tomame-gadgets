@@ -1,4 +1,4 @@
-import { getHotDealBySlug, getPostBySlug } from "@/sanity/client";
+import { getHotDealBySlug } from "@/sanity/client";
 import Head from "next/head";
 import { redirect } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
@@ -18,7 +18,7 @@ export async function generateMetadata(
   const slug = (await params).slug;
 
   // fetch data
-  const product: IProduct = await getPostBySlug(slug);
+  const product: IProduct = await getHotDealBySlug(slug);
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];
