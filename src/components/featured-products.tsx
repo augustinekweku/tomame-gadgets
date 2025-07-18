@@ -12,6 +12,7 @@ import useSWR from "swr";
 import { IProduct } from "@/types";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import { truncateText } from "@/utils";
+import LoadingHotDealCards from "./LoadingHotDealCards";
 
 export default function FeaturedProducts() {
   const searchParams = useSearchParams();
@@ -36,7 +37,11 @@ export default function FeaturedProducts() {
   const fetchPosts = () =>
     fetcher([allHotDealsPaginatedQuery, paramsForQuery()]);
 
-  const { data: hotDeals } = useSWR<{ hotDeals: IProduct[] }>(
+  const {
+    data: hotDeals,
+    isValidating,
+    isLoading,
+  } = useSWR<{ hotDeals: IProduct[] }>(
     "hotDeals",
     async () => {
       const [hotDeals] = await Promise.all([fetchPosts()]);
@@ -97,54 +102,67 @@ export default function FeaturedProducts() {
             <ChevronRight className="h-2 w-2" />
           </Button>
 
+          {isValidating && (
+            <div className="mb-4 grid gap-4 grid-cols-3 md:mb-8">
+              {new Array(3).fill(undefined).map((item, index) => (
+                <div key={index}>
+                  <LoadingHotDealCards />
+                </div>
+              ))}
+            </div>
+          )}
           {/* Products Container */}
           <div
             ref={scrollRef}
             className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory px-8"
           >
-            {hotDeals?.hotDeals.map((product) => (
-              <Card
-                key={product._id}
-                className="flex-none w-28 snap-start cursor-pointer"
-                onClick={() => {
-                  setEncodedText(
-                    encodeURIComponent(
-                      `Hi, I would like to know more about this product (${product.title}${product?.price ? " || GHs " + product?.price : ""}) \n ${siteUrl}/hot-deal/${product.slug.current}`
-                    )
-                  );
+            {hotDeals?.hotDeals?.length && !isValidating && (
+              <>
+                {hotDeals?.hotDeals.map((product) => (
+                  <Card
+                    key={product._id}
+                    className="flex-none w-28 snap-start cursor-pointer"
+                    onClick={() => {
+                      setEncodedText(
+                        encodeURIComponent(
+                          `Hi, I would like to know more about this product (${product.title}${product?.price ? " || GHs " + product?.price : ""}) \n ${siteUrl}/hot-deal/${product.slug.current}`
+                        )
+                      );
 
-                  openFullscreen(product.imageUrl);
-                }}
-              >
-                <CardContent className="p-1">
-                  <div className="relative">
-                    <Image
-                      src={product.imageUrl || "/placeholder.svg"}
-                      alt={product.title}
-                      width={300}
-                      height={400}
-                      className="w-full h-36 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                    />
-                    {/* <Badge
+                      openFullscreen(product.imageUrl);
+                    }}
+                  >
+                    <CardContent className="p-1">
+                      <div className="relative">
+                        <Image
+                          src={product.imageUrl || "/placeholder.svg"}
+                          alt={product.title}
+                          width={300}
+                          height={400}
+                          className="w-full h-36 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                        />
+                        {/* <Badge
                       variant="secondary"
                       className="absolute top-1 left-1 text-xs px-1 py-0.5 text-[10px]"
                     >
                       {}
                     </Badge> */}
-                    <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-[0.6rem] px-2 py-1 rounded-b-lg">
-                      {truncateText(product.title, 30)}
-                    </div>
-                    {/* <Button
+                        <div className="absolute bottom-0 left-0 w-full bg-black/30 text-white text-[0.6rem] px-2 py-1 rounded-b-lg">
+                          {truncateText(product.title, 30)}
+                        </div>
+                        {/* <Button
                       size="sm"
                       variant="ghost"
                       className="absolute top-1 right-1 h-6 w-6 p-0 bg-white/80 hover:bg-white"
                     >
                       <Heart className="h-3 w-3" />
                     </Button> */}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </section>
