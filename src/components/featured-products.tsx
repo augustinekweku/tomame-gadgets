@@ -98,7 +98,7 @@ export default function FeaturedProducts() {
             <ChevronRight className="h-2 w-2" />
           </Button>
 
-          {!isValidating && (
+          {isValidating && (
             <div className="w-100 md:w-3/5 lg:w-2/5">
               <div className="mb-4 grid gap-4 grid-cols-3 md:mb-8">
                 {new Array(3).fill(undefined).map((item, index) => (
