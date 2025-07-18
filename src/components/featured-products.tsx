@@ -37,11 +37,7 @@ export default function FeaturedProducts() {
   const fetchPosts = () =>
     fetcher([allHotDealsPaginatedQuery, paramsForQuery()]);
 
-  const {
-    data: hotDeals,
-    isValidating,
-    isLoading,
-  } = useSWR<{ hotDeals: IProduct[] }>(
+  const { data: hotDeals, isValidating } = useSWR<{ hotDeals: IProduct[] }>(
     "hotDeals",
     async () => {
       const [hotDeals] = await Promise.all([fetchPosts()]);
@@ -102,13 +98,15 @@ export default function FeaturedProducts() {
             <ChevronRight className="h-2 w-2" />
           </Button>
 
-          {isValidating && (
-            <div className="mb-4 grid gap-4 grid-cols-3 md:mb-8">
-              {new Array(3).fill(undefined).map((item, index) => (
-                <div key={index}>
-                  <LoadingHotDealCards />
-                </div>
-              ))}
+          {!isValidating && (
+            <div className="w-100 md:w-3/5 lg:w-2/5">
+              <div className="mb-4 grid gap-4 grid-cols-3 md:mb-8">
+                {new Array(3).fill(undefined).map((item, index) => (
+                  <div key={index}>
+                    <LoadingHotDealCards />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           {/* Products Container */}
